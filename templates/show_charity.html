@@ -1,10 +1,51 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <div class="row" style="margin-left: 20px;">
+    <div class="row" style="margin-left: 20px; margin-top: 30px;">
         <br>
         <h2>{{charity.name}}</h2>
         <p>{{charity.description}}</p>
+        <small>Made on: {{charity.created_at}}</small>
     </div>
+
+    <div class="row" style="margin-top: 50px; margin-left: 40px;">
+        <div class="col-md-6">
+            <h4 style="color: lightslategray;">Donate Now</h4>
+            <form method="POST" action='/donation/create'>
+                <fieldset>
+                    <p>
+                        <label for="name">Donor's Name</label>
+                        <br>
+                        <input type ="text" name ="name" />
+                    </p>
     
+                    <p>
+                        <label for="amount">Amount to Donate</label>
+                        <br>
+                        <input type="number" placehoder="0.00" name="amount"></input>
+                    </p>
+                </fieldset>
+    
+                <p>
+                    <button class="btn btn-primary" type='submit'>Send Donation</button>
+                </p>
+            </form>
+        </div>
+    </div>
+
+    <div class="row row-cols-1 row-cols-md-6 g-4 text-center">
+        {% for donation in donations %}
+        <div class="col">
+            <div class="card m-3" style="width: 12rem;">
+                <div class="card-body">
+                    <h4 class="card-title">{{donation.name}}</h4>
+                    <p class="card-text">${{donation.amount}}</p>
+                </div>
+                <div class="card-footer">
+                    <small class="text-muted">Donated on: {{donation.created_at}}</small>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
 {% endblock %}
