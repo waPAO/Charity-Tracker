@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="col-md-12 text-center">
+        <h1>Charity Tracker</h1>
+        <p>A new way to keep track of charity donations and steadily watch a growth in impact and change.</p>
+        <br>
+        <div class="row row-cols-1 row-cols-md-4 g-4">
+            {% for charity in charities %}
+            <div class="col">
+                <div class="card m-3" style="width: 20rem;">
+                    <div class="card-body">
+                        <h4 class="card-title">{{charity.name}}</h4>
+                        <p class="card-text">{{charity.description}}</p>
+                        <button href="#" class="btn btn-primary">Donate</button>
+                        <br>
+                        <br>
+                        <form method='POST' action='/charity/{{charity._id}}/delete'>
+                            <button class="btn btn-secondary btn-sm" type='submit'>Delete</button>
+                        </form>
+                        </p>
+                    </div>
+                    <div class="card-footer">
+                        <small class="text-muted">Made on: {{charity.created_at}}</small>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+  </div>
+{% endblock %}
