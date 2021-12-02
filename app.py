@@ -51,7 +51,8 @@ def create_donation():
     donation = {
         'name': request.form.get('name'),
         'amount': request.form.get('amount'),
-        'charity': ObjectId(request.form.get('charity'))
+        'charity': request.form.get('charity'),
+        'created_at': datetime.datetime.now()
     }
 
     donations.insert_one(donation)
